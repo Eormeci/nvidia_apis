@@ -17,7 +17,7 @@ def analyze_image_vila(image, prompt):
     image_b64 = base64.b64encode(buffered.getvalue()).decode()
 
     headers = {
-        "Authorization": "Bearer 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",
+        "Authorization": "Bearer your_api",
         "Accept": "application/json"
     }
 
@@ -53,7 +53,7 @@ def analyze_image_neva(image, prompt):
     image_b64 = base64.b64encode(buffered.getvalue()).decode()
 
     headers = {
-        "Authorization": "Bearer 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",
+        "Authorization": "Bearer your_api",
         "Accept": "application/json"
     }
 
