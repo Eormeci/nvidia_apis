@@ -34,7 +34,7 @@ def send_to_vila_api(image, prompt):
     image_bytes = buffered.getvalue()
     files = {'image': ('frame.jpg', image_bytes, 'image/jpeg')}
     data = {'prompt': prompt}
-    response = requests.post("http://127.0.0.1:5000/analyze", files=files, data=data)
+    response = requests.post("http://127.0.0.1:5003/analyze_vila", files=files, data=data)
     if response.status_code == 200:
         return response.json().get('result', 'Yanıt alınamadı.')
     else:
@@ -49,7 +49,7 @@ def send_to_neva_api(image, prompt):
     data = {'prompt': prompt}
     
     # Flask API'ye istek gönderiyoruz (NEVA API'yi çağıran API)
-    response = requests.post("http://127.0.0.1:5001/analyze_neva", files=files, data=data)
+    response = requests.post("http://127.0.0.1:5003/analyze_neva", files=files, data=data)
     
     if response.status_code == 200:
         return response.json().get('result', 'Yanıt alınamadı.')
