@@ -5,7 +5,7 @@ from PIL import Image
 from io import BytesIO
 
 app = Flask(__name__)
-
+    
 # VILA API çağrısını yapan fonksiyon
 def analyze_image_vila(image, prompt):
     invoke_url = "https://ai.api.nvidia.com/v1/vlm/nvidia/vila"
@@ -17,7 +17,7 @@ def analyze_image_vila(image, prompt):
     image_b64 = base64.b64encode(buffered.getvalue()).decode()
 
     headers = {
-        "Authorization": "Bearer your_api",
+        "Authorization": "Bearer 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",
         "Accept": "application/json"
     }
 
@@ -53,7 +53,7 @@ def analyze_image_neva(image, prompt):
     image_b64 = base64.b64encode(buffered.getvalue()).decode()
 
     headers = {
-        "Authorization": "Bearer your_api",
+        "Authorization": "Bearer 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",
         "Accept": "application/json"
     }
 
@@ -104,4 +104,4 @@ def analyze_neva():
         return jsonify({"error": str(e)})
 
 if __name__ == "__main__":
-    app.run(port=5001, debug=True)
+    app.run(host='127.0.0.1',port=5003, debug=True)
