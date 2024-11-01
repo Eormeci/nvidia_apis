@@ -31,7 +31,7 @@ def send_to_vila_api(image, prompt):
     image_bytes = buffered.getvalue()
     files = {'image': ('frame.jpg', image_bytes, 'image/jpeg')}
     data = {'prompt': prompt}
-    response = requests.post("http://127.0.0.1:5003/analyze_vila", files=files, data=data)
+    response = requests.post("http://127.0.0.1:5004/analyze_vila", files=files, data=data)
     if response.status_code == 200:
         return response.json().get('result', 'Yanıt alınamadı.')
     else:
@@ -44,7 +44,20 @@ def send_to_neva_api(image, prompt):
     image_bytes = buffered.getvalue()
     files = {'image': ('frame.jpg', image_bytes, 'image/jpeg')}
     data = {'prompt': prompt}
-    response = requests.post("http://127.0.0.1:5003/analyze_neva", files=files, data=data)
+    response = requests.post("http://127.0.0.1:5004/analyze_neva", files=files, data=data)
+    if response.status_code == 200:
+        return response.json().get('result', 'Yanıt alınamadı.')
+    else:
+        return f"API hatası: {response.status_code}"
+
+# Llava API'sini çağıran Flask API'ye görsel ve prompt'u gönderen fonksiyon
+def send_to_llava_api(image, prompt):
+    buffered = BytesIO()
+    image.save(buffered, format="JPEG")
+    image_bytes = buffered.getvalue()
+    files = {'image': ('frame.jpg', image_bytes, 'image/jpeg')}
+    data = {'prompt': prompt}
+    response = requests.post("http://127.0.0.1:5003/analyze_llava", files=files, data=data)
     if response.status_code == 200:
         return response.json().get('result', 'Yanıt alınamadı.')
     else:
@@ -54,7 +67,7 @@ def send_to_neva_api(image, prompt):
 def gradio_interface():
     with gr.Blocks() as demo:
         # Model seçimi için dropdown
-        model_choice = gr.Dropdown(choices=["VILA", "NEVA-22B"], label="Model Selection", value="VILA")
+        model_choice = gr.Dropdown(choices=["VILA", "NEVA-22B", "Llava"], label="Model Selection", value="VILA")
 
         # Video yükleme ve prompt girişi
         video_input = gr.Video(label="Videoyu Yükleyin")
@@ -78,6 +91,8 @@ def gradio_interface():
                     result = send_to_vila_api(image, prompt)
                 elif model == "NEVA-22B":
                     result = send_to_neva_api(image, prompt)
+                elif model == "Llava":
+                    result = send_to_llava_api(image, prompt)
                 else:
                     result = "Bilinmeyen model seçimi."
                 return result, image
