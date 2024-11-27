@@ -1,0 +1,28 @@
+huggingface-cli login
+
+jetson-containers run $(autotag nano_llm)
+jetson-containers run $(autotag llama-vision)
+
+
+python3 -m nano_llm.completion --api=mlc \
+  --model meta-llama/Llama-3-8b-chat-hf \
+  --quantization q4f16_ft \
+  --prompt 'Once upon a time,'
+
+**Mount**
+jetson-containers run --runtime=nvidia --volume /home/openzeka/enhar/Mount_Docker/app_mounted.py:/mnt/deneme1/deneme2/app_mounted.py \
+  --workdir /mnt/deneme1/deneme2 \
+  $(autotag nano_llm) \
+  python3 app_mounted.py
+
+**Bind Mount**
+jetson-containers run --runtime=nvidia --rm -it \
+  --volume /home/openzeka/enhar/Mount_Docker:/mnt/deneme1/deneme2 \
+  --workdir /mnt/deneme1/deneme2 \
+  $(autotag nano_llm) \
+  bash
+
+
+https://www.jetson-ai-lab.com/tutorial_api-examples.html
+
+Mount kopyalamaz , sadece içinde görünür.
