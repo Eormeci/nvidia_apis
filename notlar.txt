@@ -26,3 +26,8 @@ jetson-containers run --runtime=nvidia --rm -it \
 https://www.jetson-ai-lab.com/tutorial_api-examples.html
 
 Mount kopyalamaz , sadece içinde görünür.
+
+v1 => Basit llm
+v2 => VLM
+v3 => Debugging eklendi + gradio
+v4 => Çalışıyor ama promt dinamik güncellenmiyor
