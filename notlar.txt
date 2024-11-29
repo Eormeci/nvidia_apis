@@ -33,4 +33,4 @@ v3 => Debugging eklendi + gradio
 v4 => Çalışıyor ama promt dinamik güncellenmiyor
 v5 => Dinamik
 v6 => Openai Compatible Api formatında yeni python dosyasından çağrı yapabiliyorum.
-
+v7 => Video (Alınan frame ekrana basılmıyor.)
