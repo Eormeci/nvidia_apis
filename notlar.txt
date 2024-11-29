@@ -35,3 +35,4 @@ v5 => Dinamik
 v6 => Openai Compatible Api formatında yeni python dosyasından çağrı yapabiliyorum.
 v7 => Video (Alınan frame ekrana basılmıyor.)
 v8 => Frame ekrana basılıyor.
+v9 => Frame basılıyor ama sonuncu frame . Video sorunu da çözüldü.
